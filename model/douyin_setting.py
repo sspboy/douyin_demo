@@ -7,87 +7,34 @@ setting_data = {
 
     # 配置名称
     "set_name": "配置文件数据格式",
-    # id
-    # create_time
-    # updata_time
 
     "title":"", # 标题配置
     "pic":"",   # 图片配置
     "desc":"",  #详情配置
     "price":"", # 价格配置
-    "pro_class"
-    # pro_format
-    # pro_type
-    # mobile
-    # freight_id
-    # reduce_type
-    # commit
-    # recommend_remark
-    # pay_type
-    # start_sale_type
-    # standard_brand_id
-    # supply_7day_return
-    # size_info_template_id
-    # purchase
-    # delay_rule
-    # presell_config_level
-
-    # 标题配置
-
-    # 价格配置
-
-    # 详情配置
-
-    # 商品类型
-    "product_type": "1",
-
-    # 客服电话
-    "mobile": "",
-
-    # 运费模板
-    "freight_id": "",
-
-    # 减库存方式
-    "reduce_type": "",
-
-    # 上传方式
-    "commit": "",
-
-    # 推荐语
-    "recommend_remark": "",
-
-    # 支付方式
-    "pay_type": "",
-
-    # 上架方式
-    "start_sale_type": "",
-
-    # 品牌id
-    "standard_brand_id": "",
-
-    # 商品类目
-
-
-
-    # 七天无理由
-    "supply_7day_return": "",
-
-    # 尺码模板
-    "size_info_template_id": "",
-
+    "pro_class":"", # 商品类目
+    "pro_format":"",    # 属性
+    "pro_type":"",      # 类型
+    "mobile":"",    # 客服电话
+    "freight_id":"",    # 运费模板
+    "reduce_type":"",    # 减库存方式
+    "commit":"",        # 上传方式
+    "recommend_remark":"",      # 推荐语
+    "pay_type":"",              # 支付方式
+    "start_sale_type":"",       # 上架方式
+    "standard_brand_id":"",    # 品牌id
+    "supply_7day_return":"",    # 七天无理由
+    "size_info_template_id":"",    # 尺码模板
     # 限购
     "purchase": {"maximum_per_order": "",
                  "limit_per_buyer": "",
                  "minimum_per_order": ""},
-
-    # 特殊时间延迟发货
-
-    # 商品属性
-
-    # 商品发货模式
+    "delay_rule":"",                # 特殊时间延迟发货
+    "presell_config_level":"",      # 商品发货模式
 
 }
-
+def myprint(**can):
+    print (can)
 
 class Setting():
 
