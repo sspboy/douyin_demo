@@ -1,8 +1,9 @@
-from model.db import Data
+from DB.DB import Data
 import datetime, json, math
 
 
-class Select_table():  # 表格组件+翻页+跳转指定页面
+# 数据表-组件+翻页+跳转指定页面
+class Select_table():
 
     # 参数 数据表名称\查询条件where、排序条件order by desc asc、翻页数量、翻页条数、第几页
     config = {
@@ -142,11 +143,14 @@ class Select_table():  # 表格组件+翻页+跳转指定页面
 
         return page_message
 
+# 数据表-增、删、改、查(详情)
+
 
 if __name__ == '__main__':
-    # 条件配置
+    # 条件配置说明
     condition = [
-        {'type': 'where', 'condition': [
+        {'type': 'where',
+         'condition': [
             {'column_name': 'pay_time', 'value': '2020-11-16 16:10:10', 'operator': '>'},
             {'column_name': 'pay_time', 'value': '2021-11-16 16:12:10', 'operator': '<'},
             # {'column_name':'shop_id','value':'1312830','operator':'='}]},
