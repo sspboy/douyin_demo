@@ -1,10 +1,12 @@
 import json
 from DB.DB import Data
+
+
 # 商品上传配置
 setting_data = {
 
     # 店铺id
-    "shop_id": "123",
+    "shop_id": "123123",
 
     # 配置名称
     "set_name": "配置文件数据格式",
@@ -56,13 +58,23 @@ setting_data = {
 
 }
 
-class Setting():
+
+class Operate_table():
 
     def __init__(self, table_name):
         # 数据库名称
         self.table_name = table_name
 
+    def select_column(self):  # 获取表的列名称
+        sql = "select COLUMN_NAME from information_schema.COLUMNS where table_name = '%s';" % self.table_name
+        res = Data().select(sql)
+        column_list = []
+        for i in res:
+            column_list.append(i[0])
+        return column_list
+
     def Add(self, setting_data):        # 插入设置数据
+
         db_name = ''
         db_value = ''
         for x, y in setting_data.items():
@@ -74,15 +86,18 @@ class Setting():
                     db_value = db_value + y + ','
                 else:                   # 文本字段处理
                     db_value = db_value + "'" + str(y) + "'" + ','
-        sql="insert into max.shop_setting (%s) value (%s)" % (db_name[:-1],db_value[:-1])
+
+        sql="insert into %s (%s) value (%s)" % (self.table_name, db_name[:-1],db_value[:-1])
         # print (sql)
         res = Data().inset(sql)
         return res
 
     def Select_id(self, set_id):    # 查询设置数据
-        sql = "select * from max.shop_setting where id='%s'" % set_id
+        name_list = self.select_column()  # 表头
+        sql = "select * from %s where id='%s'" % (self.table_name, set_id)
         res = Data().select(sql)
-        return res
+        res_one = dict(list(zip(name_list, res[0])))
+        return res_one
 
     def Update(self, setting_data, set_id):     # 更新指定id的设置信息
         db_text = ''
@@ -94,25 +109,28 @@ class Setting():
                     db_text = db_text + x + '=' + y + ','
                 else:                   # 文本字段处理
                     db_text = db_text + x + '=' + "'" + str(y) + "'" + ','
-        sql = "UPDATE max.shop_setting SET %s WHERE id=%s" % (db_text[:-1], set_id)
+        sql = "UPDATE %s SET %s WHERE id=%s" % (self.table_name, db_text[:-1], set_id)
         # print (sql)
         res = Data().updata(sql)
         return res
 
     def Delete(self,set_id):        # 删除指定的设置信息
-        sql = "delete from max.shop_setting where id='%s'" % set_id
+        sql = "delete from %s where id='%s'" % (self.table_name, set_id)
         res = Data().delete(sql)
         return res
 
 # 新增
-# Setting(1).Add(setting_data)
+# Operate_table('shop_setting').Add(setting_data)
+
 
 # 删除
-#Setting().Delete(1)
+# Operate_table('shop_setting').Delete(5)
+
 
 # 查询详情
-# res = Setting().Select_id(2)
+# res = Operate_table('shop_setting').Select_id(2)
 # print (res)
 
+
 # 更新
-Setting(1).Update(setting_data,3)
+# Operate_table('shop_setting').Update(setting_data,3)
