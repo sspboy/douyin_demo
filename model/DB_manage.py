@@ -202,6 +202,7 @@ setting_data = {
 
 }
 
+
 # 数据表-增、删、改、查(id详情)
 class Operate_table():
 
