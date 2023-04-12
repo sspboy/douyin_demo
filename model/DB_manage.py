@@ -227,7 +227,7 @@ class Operate_table():
         for x, y in setting_data.items():
             if y != '':
                 db_name = db_name + x + ','
-                if type(y) == dict:     # json 字段处理
+                if type(y) == dict:     # json 字段处理dict转json字符串
                     db_value = db_value + "'" + json.dumps(y) + "'" + ','
                 elif type(y) == int:    # 整数字段处理
                     db_value = db_value + y + ','
@@ -240,12 +240,18 @@ class Operate_table():
         return res
 
     # 查询设置数据
-    def Select_id(self, set_id):
+    def Detaile(self, set_id):
         name_list = self.select_column()  # 表头
         sql = "select * from %s where id='%s'" % (self.table_name, set_id)
         res = Data().select(sql)
-        res_one = dict(list(zip(name_list, res[0])))
-        return res_one
+        # 结果不为空
+        if len(res) != 0:
+            res_one = dict(list(zip(name_list, res[0])))
+            res_one['create_time'] = str(res_one.get('create_time'))
+            res_one['updata_time'] = str(res_one.get('update_time'))
+            return res_one
+        else:   # 结果为空
+            return 'None'
 
     # 更新指定id的设置信息
     def Update(self, setting_data, set_id):

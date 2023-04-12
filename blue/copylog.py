@@ -4,21 +4,22 @@ from flask import Blueprint, render_template,request
 from model.DB_manage import Select_table,Operate_table
 
 
-set_page = Blueprint('set_page', __name__)  # 创建蓝图
-table_name = 'shop_setting'                 # 数据表名称
+copy_log = Blueprint('copylog', __name__)  # 创建蓝图
+table_name = 'item_detaile_res'             # 数据表名称
 
 
-# 设置页面路由
-@set_page.route('/', methods=['POST'])
-def setlist():
+# 列表页面
+@copy_log.route('/')
+def copylog_list():
     if request.method == 'POST':
-        data_json = request.get_data()
-    return '设置列表'
+        data_json = request.get_data()         # 查询条件对象{}
+        # res = Select_table(table_name).select_content_list()
+    return render_template('copylog.html')
 
 
 # 添加
-@set_page.route('/add', methods=['POST'])
-def setadd():
+@copy_log.route('/add', methods=['POST'])
+def copylog_add():
     if request.method== 'POST':
         data_json = eval(request.get_data())
         res = Operate_table(table_name).Add(data_json)
@@ -26,17 +27,17 @@ def setadd():
 
 
 # 详情
-@set_page.route('/detaile', methods=['POST'])
-def select_detaile():
+@copy_log.route('/detaile', methods=['POST'])
+def copylog_detaile():
     if request.method == 'POST':
         s_id = int(request.get_data())
         res = Operate_table(table_name).Detaile(s_id)
-    return res
+    return json.dumps(res)
 
 
 # 删除
-@set_page.route('/del', methods=['POST'])
-def setdel():
+@copy_log.route('/del', methods=['POST'])
+def copylog_del():
     if request.method == 'POST':
         s_id = int(request.get_data())
         res = Operate_table(table_name).Delete(s_id)
@@ -44,9 +45,9 @@ def setdel():
 
 
 # 更新
-@set_page.route('/update', methods=['POST'])
-def setupdate():
+@copy_log.route('/update', methods=['POST'])
+def copylog_update():
     if request.method == 'POST':
         data_json = request.get_data()
         print(eval(data_json))
-    return '更新设置'
+    return '更新复制日志'
