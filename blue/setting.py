@@ -1,52 +1,45 @@
-import json
-
+from flask import Blueprint, render_template
 from flask import Blueprint, render_template,request
-from model.DB_manage import Select_table,Operate_table
 
-
-set_page = Blueprint('set_page', __name__)  # 创建蓝图
-table_name = 'shop_setting'                 # 数据表名称
+set_page = Blueprint('setpage', __name__)
+table_name = 'shop_setting'             # 数据表名称
 
 
 # 设置页面路由
 @set_page.route('/', methods=['POST'])
 def setlist():
-    if request.method == 'POST':
-        data_json = request.get_data()
+    if request.method == 'GET':
+        shop_id = request.get_data()
     return '设置列表'
 
 
-# 添加
+# 添加设置
 @set_page.route('/add', methods=['POST'])
 def setadd():
-    if request.method== 'POST':
-        data_json = eval(request.get_data())
-        res = Operate_table(table_name).Add(data_json)
-    return str(res)
-
+    if request.method == 'POST':
+        shop_id = request.get_data()
+    return '添加设置'
 
 # 详情
 @set_page.route('/detaile', methods=['POST'])
 def select_detaile():
     if request.method == 'POST':
-        s_id = int(request.get_data())
-        res = Operate_table(table_name).Detaile(s_id)
-    return res
+        data_json = request.get_data()
+        print(data_json)
+    return '编辑设置'
 
 
-# 删除
+# 编辑设置
+@set_page.route('/edit', methods=['POST'])
+def setedit():
+    if request.method == 'POST':
+        shop_id = request.get_data()
+    return '编辑设置'
+
+
+# 删除设置
 @set_page.route('/del', methods=['POST'])
 def setdel():
     if request.method == 'POST':
-        s_id = int(request.get_data())
-        res = Operate_table(table_name).Delete(s_id)
-    return res
-
-
-# 更新
-@set_page.route('/update', methods=['POST'])
-def setupdate():
-    if request.method == 'POST':
-        data_json = request.get_data()
-        print(eval(data_json))
-    return '更新设置'
+        s_id = request.get_data()
+    return '删除设置'
