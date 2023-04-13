@@ -37,7 +37,7 @@ var Set_operate_db = {
     detaile:(set_id)=>{
         let url = 'http://127.0.0.1:5000/setpage/detaile'
         function sayhello(data){
-            console.log(JSON.parse(data).delay_rule)
+            console.log(JSON.parse(data))
         }
 
         XHR.PostMsg(url,set_id,sayhello,true)
@@ -110,10 +110,10 @@ setting_data = {
                  "minimum_per_order": ""}
 
 }
-// Set_operate_db.add(setting_data)         // 新增
-// Set_operate_db.del(8)                    //删除
-// Set_operate_db.update()                  // 更新
-Set_operate_db.detaile(11)            // 详情 d_id
-// Set_operate_db.list()                    // 列表 shop_id
+// Set_operate_db.add(setting_data)         // 新增ok
+// Set_operate_db.del(11)                 // 删除ok
+// Set_operate_db.update()               // 更新
+// Set_operate_db.detaile(11)            // 详情 d_id
+// Set_operate_db.list()                 // 列表 shop_id
 
 
