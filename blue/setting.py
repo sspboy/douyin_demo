@@ -1,45 +1,83 @@
-from flask import Blueprint, render_template
-from flask import Blueprint, render_template,request
+import json
 
-set_page = Blueprint('setpage', __name__)
-table_name = 'shop_setting'             # 数据表名称
+from flask import Blueprint, render_template,request
+from model.DB_manage import Select_table,Operate_table
+
+
+set_page = Blueprint('set_page', __name__)  # 创建蓝图
+<<<<<<<<< Temporary merge branch 1
+table_name = 'max.shop_setting'             # 数据表名称
+
+
+# 设置页面路由
+@set_page.route('/', methods=['GET'])
+def setlist():
+=========
+table_name = 'shop_setting'                 # 数据表名称
 
 
 # 设置页面路由
 @set_page.route('/', methods=['POST'])
 def setlist():
-    if request.method == 'GET':
-        shop_id = request.get_data()
+    if request.method == 'POST':
+        data_json = request.get_data()
+>>>>>>>>> Temporary merge branch 2
     return '设置列表'
 
 
-# 添加设置
+# 添加
 @set_page.route('/add', methods=['POST'])
 def setadd():
-    if request.method == 'POST':
-        shop_id = request.get_data()
-    return '添加设置'
+    if request.method== 'POST':
+<<<<<<<<< Temporary merge branch 1
+        data_json = request.get_data()
+        print(eval(data_json))
+        print(type(data_json))
+    return data_json
+
 
 # 详情
-@set_page.route('/detaile', methods=['POST'])
+@set_page.route('/select_detaile', methods=['POST'])
 def select_detaile():
     if request.method == 'POST':
         data_json = request.get_data()
         print(data_json)
     return '编辑设置'
+=========
+        data_json = eval(request.get_data())
+        res = Operate_table(table_name).Add(data_json)
+    return str(res)
 
 
-# 编辑设置
-@set_page.route('/edit', methods=['POST'])
-def setedit():
+# 详情
+@set_page.route('/detaile', methods=['POST'])
+def select_detaile():
     if request.method == 'POST':
-        shop_id = request.get_data()
-    return '编辑设置'
+        s_id = int(request.get_data())
+        res = Operate_table(table_name).Detaile(s_id)
+    return res
+>>>>>>>>> Temporary merge branch 2
 
 
-# 删除设置
+# 删除
 @set_page.route('/del', methods=['POST'])
 def setdel():
     if request.method == 'POST':
-        s_id = request.get_data()
+<<<<<<<<< Temporary merge branch 1
+        data_json = str(request.get_data())
+        print(data_json)
     return '删除设置'
+=========
+        s_id = int(request.get_data())
+        res = Operate_table(table_name).Delete(s_id)
+    return res
+>>>>>>>>> Temporary merge branch 2
+
+
+# 更新
+@set_page.route('/update', methods=['POST'])
+def setupdate():
+    if request.method == 'POST':
+        data_json = request.get_data()
+        print(eval(data_json))
+    return '更新设置'
