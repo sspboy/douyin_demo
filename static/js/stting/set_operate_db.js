@@ -48,7 +48,11 @@ var Set_operate_db = {
         let url = 'http://127.0.0.1:5000/setpage/'
         var json_data = {'shop_id':'3432342'}
         function sayhello(data){
-            console.log(data)
+            let d_list = JSON.parse(data)
+            for(var i of d_list){
+                console.log(i)
+
+            }
         }
 
         XHR.PostMsg(url,JSON.stringify(json_data),sayhello,true)
@@ -111,9 +115,9 @@ setting_data = {
 
 }
 // Set_operate_db.add(setting_data)         // 新增ok
-Set_operate_db.del(11)                 // 删除ok
-// Set_operate_db.update()               // 更新
-// Set_operate_db.detaile(11)            // 详情 d_id
-// Set_operate_db.list()                 // 列表 shop_id
+// Set_operate_db.del(11)                 // 删除ok
+Set_operate_db.update(setting_data)               // 更新
+// Set_operate_db.detaile(18)            // 详情 d_id ok
+// Set_operate_db.list()                 // 列表 shop_id ok
 
 

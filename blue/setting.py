@@ -1,16 +1,17 @@
 from flask import Blueprint, render_template,request
 from model.DB_manage import Operate_table,Select_table
 
-set_page = Blueprint('setpage', __name__)
+set_page = Blueprint('setpage', __name__)   # 注册蓝图
 table_name = 'shop_setting'             # 数据表名称
 
 
 # 列表
 @set_page.route('/', methods=['POST'])
 def setlist():
-    if request.method == 'GET':
+    if request.method == 'POST':
         shop_id = request.get_data()
-    return '设置列表'
+        res = Select_table(table_name).select_content_list()
+    return res
 
 
 # 添加
@@ -27,16 +28,17 @@ def setadd():
 def setdetaile():
     if request.method == 'POST':
         s_id = request.get_data()
-        res = Operate_table(table_name).Detaile(s_id)
+        res = Operate_table(table_name).Detaile(int(s_id))
     return res
 
 
-# 编辑设置
-@set_page.route('/edit', methods=['POST'])
-def setedit():
+# 更新设置
+@set_page.route('/update', methods=['POST'])
+def setupdate():
     if request.method == 'POST':
-        shop_id = request.get_data()
-    return '编辑设置'
+        json_data = request.get_data()
+        res = Operate_table(table_name).Update(json_data)
+    return res
 
 
 # 删除设置
