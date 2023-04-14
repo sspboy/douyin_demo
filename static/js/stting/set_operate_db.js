@@ -111,7 +111,7 @@ setting_data = {
 
 }
 // Set_operate_db.add(setting_data)         // 新增ok
-// Set_operate_db.del(11)                 // 删除ok
+Set_operate_db.del(11)                 // 删除ok
 // Set_operate_db.update()               // 更新
 // Set_operate_db.detaile(11)            // 详情 d_id
 // Set_operate_db.list()                 // 列表 shop_id

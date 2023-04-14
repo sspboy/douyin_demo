@@ -44,5 +44,5 @@ def setedit():
 def setdel():
     if request.method == 'POST':
         s_id = request.get_data()
-        res = Operate_table(table_name).Delete(s_id)
-    return '删除设置'
+        res = Operate_table(table_name).Delete(int(s_id))
+    return res
